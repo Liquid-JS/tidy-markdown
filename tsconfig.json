@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "strictPropertyInitialization": false,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "module": "commonjs",
+        "target": "es2015",
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "outDir": "lib",
+        "lib": [
+            "es2015",
+            "DOM",
+            "DOM.Iterable"
+        ]
+    },
+    "include": [
+        "src",
+        "test",
+        "typings"
+    ]
+}

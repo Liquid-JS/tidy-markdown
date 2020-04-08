@@ -1,39 +1,59 @@
 {
-  "name": "tidy-markdown",
-  "description": "Fix ugly markdown.",
-  "version": "2.0.5",
-  "author": "Sean Lang",
-  "bin": {
-    "tidy-markdown": "./bin/index.js"
-  },
-  "dependencies": {
-    "argparse": "^1.0.9",
-    "front-matter": "^2.1.2",
-    "html-entities": "^1.2.0",
-    "indent": "0.0.2",
-    "js-yaml": "^3.8.2",
-    "lodash": "^4.17.4",
-    "marked": "0.3.3",
-    "parse5": "^3.0.2",
-    "wcwidth": "^1.0.1"
-  },
-  "devDependencies": {
-    "coffee-script": "^1.12.4",
-    "mocha": "^3.2.0",
-    "should": "^11.2.0",
-    "standard": "^11.0.1"
-  },
-  "keywords": [
-    "markdown",
-    "parse",
-    "pretty",
-    "reformat",
-    "styleguide"
-  ],
-  "license": "GPL-3.0",
-  "main": "lib",
-  "repository": "git://github.com/slang800/tidy-markdown.git",
-  "scripts": {
-    "test": "make test"
-  }
+    "name": "@f-fjs/tidy-markdown",
+    "description": "Fix ugly markdown.",
+    "version": "2.0.8",
+    "author": "Sean Lang",
+    "bin": {
+        "tidy-markdown": "./bin/index.js"
+    },
+    "keywords": [
+        "markdown",
+        "parse",
+        "pretty",
+        "reformat",
+        "styleguide"
+    ],
+    "license": "GPL-3.0",
+    "main": "lib/index.js",
+    "repository": "git://github.com/slang800/tidy-markdown.git",
+    "scripts": {
+        "lint": "tslint --fix --project .",
+        "build": "tsc -p tsconfig.production.json",
+        "test": "mocha",
+        "prepublishOnly": "yarn build"
+    },
+    "files": [
+        "bin",
+        "lib"
+    ],
+    "types": "lib/index.d.ts",
+    "dependencies": {
+        "argparse": "^1.0.10",
+        "front-matter": "^3.1.0",
+        "html-entities": "^1.2.1",
+        "indent": "0.0.2",
+        "js-yaml": "^3.13.1",
+        "lodash": "^4.17.15",
+        "marked": "0.3.3",
+        "parse5": "<4.0.0",
+        "wcwidth": "^1.0.1"
+    },
+    "devDependencies": {
+        "@types/argparse": "^1.0.38",
+        "@types/lodash": "^4.14.149",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^13.11.0",
+        "@types/should": "^13.0.0",
+        "@types/wcwidth": "^1.0.0",
+        "mocha": "^7.1.1",
+        "should": "^13.2.3",
+        "source-map-support": "^0.5.16",
+        "standard": "^14.3.3",
+        "ts-node": "^8.8.2",
+        "tslint": "^6.1.1",
+        "typescript": "^3.8.3"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }
