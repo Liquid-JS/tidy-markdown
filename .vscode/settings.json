@@ -26,5 +26,8 @@
     "[json]": {
         "editor.formatOnSave": false
     },
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
     "tidyMarkdown.ensureFirstHeaderIsH1": false
 }

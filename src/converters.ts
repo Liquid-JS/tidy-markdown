@@ -272,7 +272,7 @@ export const Converters = new Array<Converter>(
         surroundingBlankLines: false,
         trailingWhitespace: '\n',
         replacement(content, node) {
-            if (Array.from(content).includes('\n')) {
+            if (content.indexOf('\n') >= 0) {
                 // the indent here is for all the lines after the first, so we only need
                 // do it if there's a linebreak in the content
                 content = indent(content, '  ').trimLeft()
@@ -285,8 +285,18 @@ export const Converters = new Array<Converter>(
     {
         filter: ['ul', 'ol'],
         surroundingBlankLines: true,
-        replacement(content) {
-            return content
+        replacement(content, node) {
+            let p = node
+            while (p.parentNode) {
+                p = p.parentNode
+                if (isElement(p) && p.tagName === 'li')
+                    break
+            }
+            if (isElement(p?.parentNode) && p.parentNode.tagName === 'ol' && !(isElement(node) && node.tagName === 'ol')) {
+                content = indent(content, '  ')
+            }
+
+            return content.replace(/\n\n/g, '\n').trimRight()
         }
     },
     {

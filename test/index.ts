@@ -230,11 +230,9 @@ describe('lists', () => {
 `).should.equal(`\
 - item
 - another item
-
   - sub-list item
   - sub-list another item
   - sub-list last item
-
 - last item\
 `))
 
@@ -249,15 +247,11 @@ describe('lists', () => {
 + asdfads\
 `).should.equal(`\
 - adas
-
   - asdas
   - sdas
-
 - sdfsdas
-
   - sddfasdfdfs
   - sdfafasdfsa
-
 - asdfads\
 `))
 
@@ -295,11 +289,9 @@ describe('lists', () => {
 `).should.equal(`\
 1. item
 2. another item
-
   1. sub-list item
   2. sub-list another item
   3. sub-list last item
-
 3. last item\
 `))
 })
