@@ -240,7 +240,6 @@ describe('lists', () => {
 + adas
   - asdas
   - sdas
-
 + sdfsdas
     - sddfasdfdfs
     - sdfafasdfsa
@@ -280,11 +279,9 @@ describe('lists', () => {
     it('should normalize ordered nested lists', () => tidyMdSnippet(`\
 1. item
 2. another item
-
   1. sub-list item
   2. sub-list another item
   3. sub-list last item
-
 3. last item\
 `).should.equal(`\
 1. item

@@ -44,8 +44,8 @@ export interface Link {
 }
 
 export interface Converter {
-    surroundingBlankLines?: boolean
-    trailingWhitespace?: string
+    surroundingBlankLines?: boolean | { leading: string, trailing: string } | ((node: treeAdapter.Node) => boolean | { leading: string, trailing: string })
+    trailingWhitespace?: string | ((node: treeAdapter.Node) => string)
 
     filter: ConverterFilter
     replacement(content: string, node: treeAdapter.Node, links: Link[]): string
@@ -121,7 +121,12 @@ export const Converters = new Array<Converter>(
     {
         filter: 'br',
         surroundingBlankLines: false,
-        trailingWhitespace: '\n',
+        trailingWhitespace(node) {
+            if (isElement(node.nextSibling) && node.nextSibling.tagName === 'br')
+                return ''
+
+            return '\n'
+        },
         replacement() {
             return '<br>'
         }
@@ -284,7 +289,20 @@ export const Converters = new Array<Converter>(
     },
     {
         filter: ['ul', 'ol'],
-        surroundingBlankLines: true,
+        surroundingBlankLines(node) {
+            let p = node
+            while (p.parentNode) {
+                p = p.parentNode
+                if (isElement(p) && p.tagName === 'li')
+                    break
+            }
+            return !p
+                ? true
+                : {
+                    leading: '\n',
+                    trailing: ''
+                }
+        },
         replacement(content, node) {
             let p = node
             while (p.parentNode) {
@@ -296,7 +314,7 @@ export const Converters = new Array<Converter>(
                 content = indent(content, '  ')
             }
 
-            return content.replace(/\n\n/g, '\n').trimRight()
+            return content.trimRight()
         }
     },
     {

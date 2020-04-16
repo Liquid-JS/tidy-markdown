@@ -1,7 +1,7 @@
 {
     "name": "@f-fjs/tidy-markdown",
     "description": "Fix ugly markdown.",
-    "version": "2.1.0",
+    "version": "2.1.2",
     "author": "Sean Lang",
     "bin": {
         "tidy-markdown": "./bin/index.js"

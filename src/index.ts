@@ -237,16 +237,24 @@ function flankingWhitespace(node: treeAdapter.Node) {
 */
 function process(node: treeAdapter.Node, links: Link[]) {
     assertIsConverterNode(node)
-    let whitespace: { leading: string, trailing: string }
+    let whitespace = { leading: '', trailing: '' }
     const content = getContent(node).trim()
     const converter = node._converter
 
     if (converter.surroundingBlankLines) {
-        whitespace = { leading: '\n\n', trailing: '\n\n' }
+        const surround = typeof converter.surroundingBlankLines === 'function'
+            ? converter.surroundingBlankLines(node)
+            : converter.surroundingBlankLines
+        if (typeof surround === 'object')
+            whitespace = surround
+        else if (surround)
+            whitespace = { leading: '\n\n', trailing: '\n\n' }
     } else {
         whitespace = flankingWhitespace(node)
-        if (converter.trailingWhitespace != null) {
-            whitespace.trailing += converter.trailingWhitespace
+        if (converter.trailingWhitespace) {
+            whitespace.trailing += typeof converter.trailingWhitespace === 'function'
+                ? converter.trailingWhitespace(node) || ''
+                : converter.trailingWhitespace || ''
         }
     }
 
